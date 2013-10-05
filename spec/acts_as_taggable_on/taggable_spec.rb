@@ -216,6 +216,13 @@ describe "Taggable" do
     TaggableModel.tagged_with("ruby").first.should == @taggable
   end
 
+  it "should be able to get a count with find by tag when using a group by" do
+    @taggable.skill_list = "ruby"
+    @taggable.save
+
+    TaggableModel.tagged_with("ruby").group(:created_at).count.count.should == 1
+  end
+
   it "should be able to find by tag with context" do
     @taggable.skill_list = "ruby, rails, css"
     @taggable.tag_list = "bob, charlie"

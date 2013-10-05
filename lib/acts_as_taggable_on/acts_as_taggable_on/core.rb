@@ -179,6 +179,7 @@ module ActsAsTaggableOn::Taggable
 
         taggings_alias, _ = adjust_taggings_alias("#{alias_base_name}_taggings_group"), "#{alias_base_name}_tags_group"
 
+        group = [] # Rails interprets this as a no-op in the group() call below
         if options.delete(:match_all)
           joins << "LEFT OUTER JOIN #{ActsAsTaggableOn::Tagging.table_name} #{taggings_alias}" +
                    "  ON #{taggings_alias}.taggable_id = #{quote}#{table_name}#{quote}.#{primary_key}" +
